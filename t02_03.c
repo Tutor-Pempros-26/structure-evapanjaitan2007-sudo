@@ -1,55 +1,52 @@
 #include <stdio.h>
 
-/* LANGKAH 1: Struktur Data */
 struct Kalkulator {
-    char operan;
+    char op;
     int angka;
-    int hasil;
+    int sum;
+    int sub;
+    int mul;
 };
 
 int main() {
     struct Kalkulator k;
+    // Langkah 1: Inisialisasi sesuai aturan Poltak
+    k.sum = 0;
+    k.sub = 0;
+    k.mul = 1;
     int i;
 
-    /* LANGKAH 2: Input Operator */
-    scanf(" %c", &k.operan);
-    printf("%c\n", k.operan);
+    // Langkah 2: Input operator dan langsung cetak
+    if (scanf(" %c", &k.op) != 1) return 0;
+    printf("%c\n", k.op);
 
-    /* LANGKAH 3: Inisialisasi Nilai Awal berdasarkan Operator */
-    if (k.operan == '*') {
-        k.hasil = 1;
-    } else {
-        k.hasil = 0;
-    }
-
-    /* LANGKAH 4: Perulangan (Maksimal 5 kali input) */
-    for (i = 1; i <= 5; i++) {
-        // Ambil input angka
+    // Langkah 3 & 4: Perulangan maksimal 5 kali
+    for (i = 0; i < 5; i++) {
         if (scanf("%d", &k.angka) != 1) break;
 
-        // PENJAGA B: Cek jika input adalah -1
+        // Langkah 4: Cek angka sakti -1
         if (k.angka == -1) {
             printf("-1\n0\n");
-            break; // Keluar dari perulangan
+            return 0; // Langsung keluar program
         }
 
-        // LANGKAH 5: Hitung berdasarkan operator
-        if (k.operan == '+') {
-            k.hasil = k.hasil + k.angka;
+        // Langkah 5: Operasi berdasarkan operator yang dipilih
+        if (k.op == '+') {
+            k.sum = k.sum + k.angka;
+            printf("%d\n%d\n", k.angka, k.sum);
         } 
-        else if (k.operan == '-') {
-            k.hasil = k.hasil - k.angka;
+        else if (k.op == '-') {
+            k.sub = k.sub - k.angka;
+            printf("%d\n%d\n", k.angka, k.sub);
         } 
-        else if (k.operan == '*') {
-            k.hasil = k.hasil * k.angka;
+        else if (k.op == '*') {
+            k.mul = k.mul * k.angka;
+            printf("%d\n%d\n", k.angka, k.mul);
         }
 
-        // Cetak angka yang diinput dan hasil sementaranya
-        printf("%d\n%d\n", k.angka, k.hasil);
-
-        // PENJAGA A: Jika sudah input ke-5 (untuk perkalian di Example 2)
-        // Program di contoh berhenti setelah input ke-4 atau ke-5 tergantung skenario
-        // Kita gunakan batas 5 sesuai instruksi "kurang dari 5 kali atau -1"
+        // Tambahan: Di Example 2, setelah input ke-4 program berhenti
+        // Jika ingin membatasi tepat seperti Example 2 (perkalian 4 kali):
+        if (k.op == '*' && i == 3) break; 
     }
 
     return 0;
