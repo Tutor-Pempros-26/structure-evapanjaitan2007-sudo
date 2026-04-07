@@ -1,52 +1,38 @@
+//  12S25021 - Gabriel Ignasius Sinaga
 #include <stdio.h>
+#include <stdlib.h>
 
-/* LANGKAH 1: Struktur Data */
-struct Kalkulator {
+int main(int _argv, char **_argc)
+{
     char op;
+    int hasil = 0;
     int angka;
-    int hasil;
-};
+    int iterasi = 0;
 
-int main() {
-    struct Kalkulator k;
-    int i;
+    scanf("%c", &op);
 
-    /* LANGKAH 3: Memilih Operator */
-    scanf(" %c", &k.op);
-    printf("%c\n", k.op);
-
-    /* LANGKAH 2: Inisialisasi Nilai Awal */
-    if (k.op == '*') {
-        k.hasil = 1;
-    } else {
-        k.hasil = 0;
+    if (op == '*') {
+        hasil = 1;
     }
 
-    /* LANGKAH 4: Perulangan (Maksimal 5 kali input) */
-    for (i = 0; i < 5; i++) {
-        // Ambil input angka
-        if (scanf("%d", &k.angka) != 1) break;
+    while (iterasi < 4) {
+        scanf("%d", &angka);
 
-        // Cek jika angka adalah -1 (Berhenti)
-        if (k.angka == -1) {
-            printf("-1\n0\n");
-            return 0; // Matikan program
+        if (angka == -1) {
+            printf("0\n");
+            break;
         }
 
-        // Hitung berdasarkan operator
-        if (k.op == '+') {
-            k.hasil = k.hasil + k.angka;
-        } else if (k.op == '-') {
-            k.hasil = k.hasil - k.angka;
-        } else if (k.op == '*') {
-            k.hasil = k.hasil * k.angka;
+        if (op == '+') {
+            hasil = hasil + angka;
+        } else if (op == '-') {
+            hasil = abs(hasil - angka);
+        } else if (op == '*') {
+            hasil = hasil * angka;
         }
 
-        // Cetak Angka yang baru masuk, lalu cetak Hasilnya
-        printf("%d\n%d\n", k.angka, k.hasil);
-
-        // Khusus Example 2 (Perkalian berhenti di input ke-4)
-        if (k.op == '*' && i == 3) break;
+        printf("%d\n", hasil);
+        iterasi++;
     }
 
     return 0;
