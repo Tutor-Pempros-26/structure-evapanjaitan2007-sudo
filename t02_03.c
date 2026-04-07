@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+/* LANGKAH 1: Struktur Data */
 struct Kalkulator {
     char op;
     int angka;
@@ -10,29 +11,29 @@ int main() {
     struct Kalkulator k;
     int i;
 
-    // 1. Baca operator dan cetak
-    if (scanf(" %c", &k.op) != 1) return 0;
+    /* LANGKAH 3: Memilih Operator */
+    scanf(" %c", &k.op);
     printf("%c\n", k.op);
 
-    // 2. Tentukan nilai awal (Inisialisasi)
+    /* LANGKAH 2: Inisialisasi Nilai Awal */
     if (k.op == '*') {
         k.hasil = 1;
     } else {
         k.hasil = 0;
     }
 
-    // 3. Perulangan Input (Maksimal 5 kali)
+    /* LANGKAH 4: Perulangan (Maksimal 5 kali input) */
     for (i = 0; i < 5; i++) {
-        // Ambil angka
+        // Ambil input angka
         if (scanf("%d", &k.angka) != 1) break;
 
-        // Cek jika angka adalah -1 (Berhenti seketika)
+        // Cek jika angka adalah -1 (Berhenti)
         if (k.angka == -1) {
             printf("-1\n0\n");
-            return 0; 
+            return 0; // Matikan program
         }
 
-        // 4. Hitung hasil berdasarkan operator
+        // Hitung berdasarkan operator
         if (k.op == '+') {
             k.hasil = k.hasil + k.angka;
         } else if (k.op == '-') {
@@ -41,13 +42,11 @@ int main() {
             k.hasil = k.hasil * k.angka;
         }
 
-        // 5. Cetak Angka yang diinput, lalu cetak Hasilnya
+        // Cetak Angka yang baru masuk, lalu cetak Hasilnya
         printf("%d\n%d\n", k.angka, k.hasil);
 
-        // Tambahan: Di Example 2, program berhenti setelah 4 kali input angka
-        if (k.op == '*' && i == 3) {
-            break;
-        }
+        // Khusus Example 2 (Perkalian berhenti di input ke-4)
+        if (k.op == '*' && i == 3) break;
     }
 
     return 0;
